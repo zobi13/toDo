@@ -1,3 +1,4 @@
+from re import template
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
@@ -5,12 +6,14 @@ from quickstart.serializers import UserSerializer, GroupSerializer
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.shortcuts import render
 
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
+    template_name = "/templates/singleUserTemplate.html"
 
 
 class GroupViewSet(viewsets.ModelViewSet):
@@ -22,4 +25,3 @@ class HomeView(APIView):
 
     def get(self, request, format=None):
         return Response("VIEW")
-
